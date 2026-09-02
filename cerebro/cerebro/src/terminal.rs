@@ -80,7 +80,7 @@ pub struct StackDeployArgs {
     #[clap(long, short = 's')]
     pub subdomain: Option<String>,
     /// Public or SSH-like repository URL for cloning into deployment
-    #[clap(long, short = 'u', env = "CEREBRO_STACK_GIT_REPO_URL", default_value="git@github.com:esteinig/cerebro.git")]
+    #[clap(long, short = 'u', env = "CEREBRO_STACK_GIT_REPO_URL", default_value="git@github.com:vidrl/cerebro.git")]
     pub git_url: String,
     /// Primary file system path if using Cerebro FS
     #[clap(long)]

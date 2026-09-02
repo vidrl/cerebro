@@ -1,5 +1,4 @@
 // Cerebro: metagenomic and -transcriptomic diagnostics for clinical production environments
-// Copyright (C) 2024  Eike Steinig
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by

@@ -1,11 +1,11 @@
 [package]
 name = "cerebro-ciqa"
 version = "1.0.0-alpha.1"
-authors = ["esteinig <eike.steinig@unimelb.edu.au>"]
+authors = ["esteinig"]
 description = "Cerebro: continuous integration of quality assurance"
-documentation = "https://github.com/esteinig/cerebro"
-homepage = "https://github.com/esteinig/cerebro"
-repository = "https://github.com/esteinig/cerebro"
+documentation = "https://github.com/vidrl/cerebro"
+homepage = "https://github.com/vidrl/cerebro"
+repository = "https://github.com/vidrl/cerebro"
 readme = "README.md"
 keywords = ["meta-gp", "cerebro", "clinical", "pathogen", "metagenomics"]
 categories = ["science"]
@@ -27,10 +27,10 @@ name = "cerebro_ciqa"
 
 [dependencies]
 
-cerebro-fs = { git = "https://github.com/esteinig/cerebro", package = "cerebro-fs", branch = "main" }
-cerebro-client = { git = "https://github.com/esteinig/cerebro", package = "cerebro-client", branch = "main" }
-cerebro-model = { git = "https://github.com/esteinig/cerebro", package = "cerebro-model", branch = "main" }
-cerebro-pipeline = { git = "https://github.com/esteinig/cerebro", package = "cerebro-pipeline", branch = "main" }
+cerebro-fs = { git = "https://github.com/vidrl/cerebro", package = "cerebro-fs", branch = "main" }
+cerebro-client = { git = "https://github.com/vidrl/cerebro", package = "cerebro-client", branch = "main" }
+cerebro-model = { git = "https://github.com/vidrl/cerebro", package = "cerebro-model", branch = "main" }
+cerebro-pipeline = { git = "https://github.com/vidrl/cerebro", package = "cerebro-pipeline", branch = "main" }
 meta-gpt = { git = "https://github.com/esteinig/meta-gpt", branch = "main", features = [], default-features = false }
 
 

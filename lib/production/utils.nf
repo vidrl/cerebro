@@ -482,7 +482,7 @@ def completionMessage(){
 
     Please cite the following tools if used in the pipeline:
 
-        - cerebro        1.0.0      https://github.com/esteinig/cerebro      
+        - cerebro        1.0.0      https://github.com/vidrl/cerebro      
         - minimap2       2.24       https://github.com/lh3/minimap2         
         - bowtie2        2.24       https://github.com/        
         - samtools                  https://github.com/samtools/samtools      

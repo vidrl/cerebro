@@ -70,7 +70,7 @@ You do not need the `Docker` stack for core metagenome diagnostic pipelines and 
 Pathogen detection with PE Illumina reads from metagenomic sequencing of sterile-site samples (validated for ocular fluid and cerebrospinal fluid):
 
 ```bash
-nextflow run -r v1.0.0 https://github.com/esteinig/cerebro \
+nextflow run -r v1.0.0 https://github.com/vidrl/cerebro \
   -profile dgx,large,mamba,cns,cipher \
   -entry pathogen \
   --outputDirectory outputTest/ \
@@ -171,7 +171,7 @@ Large segmental copy number variation (CNV) detection across human chromosomes f
 This is a supplementary pipeline not intended for production - to execute please clone the repository first:
 
 ```
-git clone https://github.com/esteinig/cerebro
+git clone https://github.com/vidrl/cerebro
 ```
 
 Execute with relevant parameters:
@@ -185,6 +185,6 @@ nextflow run ./cerebro/lib/standalone/aneuploidy/main.nf -profile mamba,medium \
   --resources.threads.minimap2 32
 ```
 
-Other parameters can be found in the [`nextflow.config`](https://github.com/esteinig/cerebro/blob/main/lib/standalone/aneuploidy/nextflow.config). Resource dependencies are the CHM13v2 human reference genome and a sub-sampled (5x) reference alignment of [HG007 (ChineseTrio, mother)](https://github.com/genome-in-a-bottle/giab_data_indexes). We tested this default configuration on Detroit cell-lines which derive from a female pharyngeal cancer patient and show strong patterns of segmental aneuploidy across chromosomes when compared to a known healthy patient sample.
+Other parameters can be found in the [`nextflow.config`](https://github.com/vidrl/cerebro/blob/main/lib/standalone/aneuploidy/nextflow.config). Resource dependencies are the CHM13v2 human reference genome and a sub-sampled (5x) reference alignment of [HG007 (ChineseTrio, mother)](https://github.com/genome-in-a-bottle/giab_data_indexes). We tested this default configuration on Detroit cell-lines which derive from a female pharyngeal cancer patient and show strong patterns of segmental aneuploidy across chromosomes when compared to a known healthy patient sample.
 
 

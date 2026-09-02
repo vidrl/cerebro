@@ -2,9 +2,8 @@ from setuptools import setup, find_packages
 
 setup(
     name="cerebro-utils",
-    url="https://github.com/esteinig/cerebro",
-    author="Eike J. Steinig",
-    author_email="eike.steinig@unimelb.edu.au",
+    url="https://github.com/vidrl/cerebro",
+    author="META-GP",
     packages=find_packages(),
     include_package_data=True, 
     package_data={
