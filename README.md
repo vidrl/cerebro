@@ -100,7 +100,7 @@ Select the workflow with `-entry`:
 | `panviral` | Panviral enrichment (probe hybridisation capture, e.g. Twist or Agilent). |
 | `quality` | Quality control module only. |
 | `culture` | Culture identification (under development). |
-| `production` | Consumes staged sample files placed in `--stageDirectory` by `cerebro-tower`. **Not for interactive use** -- see [Production mode](#production-mode) below, which is a different thing. |
+| `production` | Consumes staged sample files placed in `--stageDirectory` by `cerebro-tower`. **Not for interactive use**-see [Production mode](#production-mode) below, which is a different thing. |
 
 ### Profiles
 
@@ -116,7 +116,7 @@ Profiles are comma-separated and combine. You normally need one from each of the
 | **Modifiers** | `keepHost` (skip host depletion), `deduplicate` |
 
 > [!NOTE]
-> `dgx` is not only a resource profile -- it also sets per-tool thread counts and the `Apptainer`
+> `dgx` is not only a resource profile-it also sets per-tool thread counts and the `Apptainer`
 > library, cache and bind paths. Later profiles override earlier ones, so profile order matters.
 
 ### Quick start
@@ -144,7 +144,7 @@ is the main diagnostic challenge (`needle-in-a-haystack`).
 > environmental), where an abundant and diverse background microbiome is the main challenge
 > (`haystack-full-of-needles`).
 
-Symlink the database rather than copying it -- it is roughly 2 TB:
+Symlink the database rather than copying it, it is roughly 2 TB:
 
 ```bash
 mkdir 20260302_RUN && cd 20260302_RUN
@@ -153,11 +153,10 @@ mkdir fastq && cp /path/to/run/fastq/* fastq/
 ```
 
 > [!IMPORTANT]
-> Sample identifiers must follow `{SAMPLE_ID}__{NUCLEIC_ACID}__{SAMPLE_TAG}_{TAIL}` -- for example
+> Sample identifiers must follow `{SAMPLE_ID}__{NUCLEIC_ACID}__{SAMPLE_TAG}_{TAIL}`-for example
 > `DW-63-103__DNA__S_S1`. Control tags `NTC`, `ENV` and `POS` are required for automatic control
 > co-selection in the application, and DNA/RNA tags drive library pairing. Identifiers must be
-> anonymised, must not contain spaces, and must not encode the sample site or type. Full scheme in
-> the [production pipeline SOP](https://github.com/vidrl/SOP/blob/main/cerebro/USER_production_pipeline_operations.md).
+> anonymised, must not contain spaces, and must not encode the sample site or type.
 
 ### Apptainer and SLURM
 
@@ -230,8 +229,8 @@ Production parameters:
 
 | Parameter | Required | Notes |
 | --- | --- | --- |
-| `--production` | -- | Enables model creation and upload. Off by default. |
-| `--apiUrl` | yes | API endpoint. **Not** the frontend address. |
+| `--production` |-| Enables model creation and upload. Off by default. |
+| `--apiUrl` | yes | API endpoint address. |
 | `--apiTokenEnv` | no | Environment variable holding the token. Default `CEREBRO_API_TOKEN`. |
 | `--teamName` | yes | Must already exist. |
 | `--databaseName` | yes | Created if absent. |
@@ -282,12 +281,6 @@ cerebro-client create-pathogen \
 
 
 ### Known issues and cleanup
-
-> [!WARNING]
-> The pipeline sets `errorStrategy = "ignore"` for all processes. **A failed process does not fail the
-> run.** A sample can complete with silently missing classifier, alignment or assembly evidence, and
-> the resulting model will look normal. Always check the Nextflow execution report and confirm that
-> every expected output is present in `results/` before interpreting or uploading results.
 
 Other known issues:
 
@@ -533,7 +526,7 @@ input files at the start of a run unless the `--fastq` argument is provided (see
 
 ### Quick start
 
-The default pathogen detection configuration uses the **`Cipher`** diagnostic database -- an
+The default pathogen detection configuration uses the **`Cipher`** diagnostic database-an
 amalgamation of archaeal and bacterial (GTDB), eukaryotic (EuPath, WormBase) and viral (ICTV)
 reference genome collections with a grafted taxonomy. It supplies the indices for all classifiers in
 the profiling module (`Kraken2`, `Metabuli`, `Ganon2`, `Sylph`, `KMCP`, `Bracken`), the alignment
