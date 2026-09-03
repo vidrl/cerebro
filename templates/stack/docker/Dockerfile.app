@@ -6,7 +6,7 @@ COPY ./app/package*.json ./
 RUN npm install
 {{else}}
 # TODO: In production mode we can download the application directory and build from revision branch
-# RUN git clone --depth=1 -b {{{ revision }}} https://github.com/esteinig/cerebro && mv cerebro/app /app
+# RUN git clone --depth=1 -b {{{ revision }}} https://github.com/vidrl/cerebro && mv cerebro/app /app
 WORKDIR /app
 COPY ./app ./
 RUN npm install

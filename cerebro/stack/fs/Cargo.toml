@@ -1,11 +1,11 @@
 [package]
 name = "cerebro-fs"
 version = "1.0.0-alpha.1"
-authors = ["esteinig <eike.steinig@unimelb.edu.au>"]
+authors = ["meta-gp"]
 description = "Cerebro: file system command-line client and library for interacting with SeaweedFS and Cerebro API"
-documentation = "https://github.com/esteinig/cerebro"
-homepage = "https://github.com/esteinig/cerebro"
-repository = "https://github.com/esteinig/cerebro"
+documentation = "https://github.com/vidrl/cerebro"
+homepage = "https://github.com/vidrl/cerebro"
+repository = "https://github.com/vidrl/cerebro"
 readme = "README.md"
 keywords = ["meta-gp", "cerebro", "clinical", "pathogen", "metagenomics"]
 categories = ["science"]

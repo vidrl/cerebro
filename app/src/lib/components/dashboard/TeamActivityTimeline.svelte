@@ -5,7 +5,7 @@
 
 <Timeline>
     <ActivityItem
-        user="Chhay Lim"
+        user="META-GP"
         activity="created report for sample"
         target="DW-63-76"
         timestamp="October 26th, 2023"      
@@ -13,7 +13,7 @@
         link="Test"
     />
     <ActivityItem
-        user="Prashanth Ramachandran"
+        user="META-GP"
         activity="accepted candidate for sample"
         target="DW-63-76"
         timestamp="October 26th, 2023"
@@ -22,7 +22,7 @@
         targetPath={["VIDRL", "CNS Metagenomics", "Phage Validation", "DW-63-76"]}
     />
     <ActivityItem
-        user="Eike Steinig"
+        user="META-GP"
         activity="commented on candidate for sample"
         target="DW-63-76"
         timestamp="October 26th, 2023"
@@ -31,7 +31,7 @@
         link="Test"
     />
     <ActivityItem
-        user="Eike Steinig"
+        user="META-GP"
         activity="selected candidate for sample"
         target="DW-63-76"
         timestamp="October 26th, 2023"

@@ -8,7 +8,7 @@
 [pipeline]
 name                 = "mgp-cerebro"
 version              = "0.7.0"
-source               = "https://github.com/esteinig/cerebro"
+source               = "https://github.com/vidrl/cerebro"
 
 # Configuration schema for traceable changes to parameters and other shenanigans
 # this is the `nextflow.config` file used for the pipeline run
