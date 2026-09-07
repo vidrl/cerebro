@@ -1,6 +1,6 @@
 [package]
 name = "cerebro-watcher"
-version = "1.0.0-alpha.1"
+version = "1.0.0"
 authors = ["meta-gp"]
 description = "Cerebro: production run watcher and file uploader"
 documentation = "https://github.com/vidrl/cerebro"

@@ -1,6 +1,6 @@
 [package]
 name = "cerebro-ciqa"
-version = "1.0.0-alpha.1"
+version = "1.0.0"
 authors = ["meta-gp"]
 description = "Cerebro: continuous integration of quality assurance"
 documentation = "https://github.com/vidrl/cerebro"

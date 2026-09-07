@@ -1,8 +1,8 @@
 [alias]
 update-deps = """
 update \
-  -p git+https://github.com/vidrl/cerebro?branch=main#cerebro-client@1.0.0-alpha.1 \
-  -p git+https://github.com/vidrl/cerebro?branch=main#cerebro-model@1.0.0-alpha.1 \
-  -p git+https://github.com/vidrl/cerebro?branch=main#cerebro-pipeline@1.0.0-alpha.1 \
+  -p git+https://github.com/vidrl/cerebro?branch=a70d328b16544ba66cb70079a8754b9ae455f9fe#cerebro-client@1.0.0 \
+  -p git+https://github.com/vidrl/cerebro?branch=a70d328b16544ba66cb70079a8754b9ae455f9fe#cerebro-model@1.0.0 \
+  -p git+https://github.com/vidrl/cerebro?branch=a70d328b16544ba66cb70079a8754b9ae455f9fe#cerebro-pipeline@1.0.0 \
   -p meta-gpt
 """

@@ -1,6 +1,6 @@
 [package]
 name = "cerebro-worker"
-version = "1.0.0-alpha.1"
+version = "1.0.0"
 authors = ["meta-gp"]
 description = "Faktory workers for backend task scheduling in Cerebro"
 documentation = "https://github.com/vidrl/cerebro"

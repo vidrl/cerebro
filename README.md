@@ -126,7 +126,7 @@ cerebrospinal and ocular fluid):
 
 ```bash
 nextflow run vidrl/cerebro \
-  -revision v1.0.0-alpha.1 \
+  -revision v1.0.0 \
   -entry pathogen \
   -profile mamba,cns,cipher,medium \
   -work-dir ./work \
@@ -174,7 +174,7 @@ Then run with containers, optionally on SLURM:
 
 ```bash
 nextflow run vidrl/cerebro \
-  -revision v1.0.0-alpha.1 \
+  -revision v1.0.0 \
   -entry pathogen \
   -profile dgx,apptainer,slurm,cns,cipher \
   -work-dir ./work \
@@ -210,7 +210,7 @@ environment variable named by `--apiTokenEnv` (default `CEREBRO_API_TOKEN`):
 export CEREBRO_API_TOKEN=$(cerebro-client --url https://api.example.org login -e you@example.org)
 
 nextflow run vidrl/cerebro \
-  -revision v1.0.0-alpha.1 \
+  -revision v1.0.0 \
   -entry pathogen \
   -profile dgx,apptainer,cns,cipher,medium \
   -work-dir ./work \
