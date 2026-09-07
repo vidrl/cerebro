@@ -31,7 +31,7 @@ cerebro-fs = { git = "https://github.com/vidrl/cerebro", package = "cerebro-fs",
 cerebro-client = { git = "https://github.com/vidrl/cerebro", package = "cerebro-client", branch = "main" }
 cerebro-model = { git = "https://github.com/vidrl/cerebro", package = "cerebro-model", branch = "main" }
 cerebro-pipeline = { git = "https://github.com/vidrl/cerebro", package = "cerebro-pipeline", branch = "main" }
-meta-gpt = { git = "https://github.com/esteinig/meta-gpt", branch = "main", features = [], default-features = false }
+meta-gpt = { git = "https://github.com/vidrl/meta-gpt", rev = "f97d55c19956c03f90a095fa8432ef4971aa9626", features = [], default-features = false }
 
 
 

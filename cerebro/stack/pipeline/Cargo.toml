@@ -53,8 +53,8 @@ clap = { version = "4.3.23", features = ["derive", "env", "unstable-styles", "wr
 anstyle = "1.0.6"
 fancy-regex = "0.11.0"
 
-vircov = { git = "https://github.com/esteinig/vircov", branch = "main" }
-scrubby = { git = "https://github.com/esteinig/scrubby", branch = "main" }
+vircov = { git = "https://github.com/vidrl/vircov", rev = "a70d328b16544ba66cb70079a8754b9ae455f9fe" }
+scrubby = { git = "https://github.com/vidrl/scrubby", rev = "308fd2ea48a6e4aa77f47b5d995fd75b33b04688" }
 
 tar = "0.4.41"
 reqwest = { version = "0.12.7", features = ["blocking"] }
