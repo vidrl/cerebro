@@ -576,8 +576,6 @@ Reported performance was obtained on a single-centre, non-representative cohort 
 
 Outputs are stochastic and are sensitive to the model, quantisation, system prompt, and decision tree configuration. Changing any of these changes behaviour and invalidates the reported performance.
 
-The `meta-gpt` dependency is currently pinned to a git branch (`main`) rather than a tag or commit. A new build made will not necessarily reproduce the system that was evaluated. Pin the dependency to a specific revision before using this module for anything you intend to rely on.
-
 ### Conditions of use
 
 This feature must not be used as the sole or primary basis for a clinical diagnosis, a patient report, or any patient management decision. It is intended to support review by a qualified expert, and does not replace the expertise required to evaluate all possible pathogen detections (see development cohort in preprint).
