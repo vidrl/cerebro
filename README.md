@@ -6,11 +6,11 @@ Metagenomic diagnostics pipeline and collaborative reporting stack for pathogen 
 <summary>🩸 Metagenomic diagnostic core functions </summary>
 <br>
  
-- Multi-classifier taxonomic profiling, metagenome assembly and alignment in Nextflow
-- Optimized pangenome host depletion and background depletion with [`Scrubby`]()
-- Viral infections, pan-viral enrichment protocols and syndrome-specific subtyping panels using [`Vircov`]()
+- Multi-classifier taxonomic profiling, metagenome assembly and alignment in [Nextflow](https://nextflow.io/)
+- Optimized pangenome host depletion and background depletion with [`Scrubby`](https://github.com/vidrl/scrubby)
+- Viral infections, pan-viral enrichment protocols and syndrome-specific subtyping panels using [`Vircov`](https://github.com/vidrl/vircov)
 - Differential host tumor DNA diagnostics using segmental CNV detection (supplementary)
-- Custom database and index construction, grafted taxonomies, genome cleaning with [`Cipher`]()
+- Custom database and index construction, grafted taxonomies, genome cleaning with [`Cipher`](https://github.com/vidrl/cipher)
 
 </details>
 
@@ -18,13 +18,13 @@ Metagenomic diagnostics pipeline and collaborative reporting stack for pathogen 
 <summary>📰 Collaborative clinical reporting (Bug Board) </summary>
 <br>
  
-- [Collaborative and auditable pathogen determination]() from metagenome sequencing results
+- [Collaborative and auditable pathogen determination](#application-stack) from metagenome sequencing results
 - Multi-tenant Svelte application and API with secure local or web-server deployment configs
 - Scalable application stack deployment with different data security and collaboration models
-- Stack configuration and deployment integrated into the primary command-line interface ([Cerebro CLI]()) 
-- Clinical reporting with [`Typst`]() formatted templates linked into evidence from multi-classifier/databases
-- Secure [`wasm` enabled report generation]() in-browser for sensitive reports, interactive data visualizations
-- Training interface for sample collectiosn with orthogonal reference data
+- Stack configuration and deployment integrated into the primary command-line interface
+- Clinical reporting with [`Typst`](https://github.com/typst/typst) formatted templates linked into evidence from multi-classifier/databases
+- Secure [`wasm` enabled report generation](#clinical-reporting) in-browser for sensitive reports
+- Training interface for sample collections with orthogonal reference data
 
 </details>
 
@@ -32,12 +32,16 @@ Metagenomic diagnostics pipeline and collaborative reporting stack for pathogen 
 <summary>🏥 Clinical and public health production environments </summary>
 <br>
  
-- Simulations using in silico syndromic reference panels for signal- and read-level data with [`Cipher`]()
-- Evaluation of simulation and patient datasets for quality assurance with [`Cipher`]() and [`Cerebro`]()
+- Simulations using in silico syndromic reference panels for signal- and read-level data with [`Cipher`](https://github.com/vidrl/cipher)
+- Evaluation of simulated and clinical reference datasets for [quality assurance and benchmarking](#disclosure-ai-assisted-diagnostic-interpretation)
 - Background/sample site/kitome contamination issues in clinical or public health environments 
-- Distributed sequence and analysis storage, file system and data retention policies, cloud storage etc. through [`SeaweedFS`]()
+- Distributed sequence and analysis storage, file system and data retention policies, cloud storage etc. through [`SeaweedFS`](https://github.com/seaweedfs/seaweedfs/)
 
 </details>
+
+#### ⚠️ **Generative AI is restricted in this repository** ⚠️
+
+Cerebro is diagnostic medical device software in [research stage](#research-code). Generative AI must not be used to write or modify code, and specimen-derived data must not be given to any AI system (local or hosted) outside of the [evaluated subsystem of Cerebro](#disclosure-ai-assisted-diagnostic-interpretation) which has known [limitations](#evaluation-and-its-limits). Using AI to read, review, and explain the code, and to draft documentation, is explicitly encouraged. See [`AI_POLICY.md`](AI_POLICY.md) and the full policy in [`AGENTS.md`](AGENTS.md).
 
 ## Table of contents
 
@@ -59,28 +63,24 @@ Metagenomic diagnostics pipeline and collaborative reporting stack for pathogen 
 - [Cerebro API](#cerebro-api)
 - [Cerebro FS](#cerebro-fs)
 - [Databases and taxonomy](#databases-and-taxonomy)
-- [Disclosure: AI-assisted diagnostic interpretation](#disclosure-ai-assisted-diagnostic-interpretation)
+- [AI-assisted diagnostic interpretation](#disclosure-ai-assisted-diagnostic-interpretation)
+  - [Intended purpose](#intended-purpose)
   - [Evaluation and its limits](#evaluation-and-its-limits)
   - [Reproducibility caveat](#reproducibility-caveat)
   - [Conditions of use](#conditions-of-use)
-  - [Research code](#research-code)
+  - [Clinical notes in prompt context and outputs](#clinical-notes-in-prompt-context-and-outputs)
+- [Research code](#research-code)
 - [Status](#status)
 
 
 ## Getting started
 
-Let's step through some common tasks and core functions of `Cerebro` and the application and reporting stack. This section provides some examples of how to get started quickly with `Cerebro`. For more details and how to deploy and operate the full application in production please see the [documentation](). 
+Let's step through some common tasks and core functions of Cerebro and the application and reporting stack. The following sections provide some examples and caveats of how to get started quickly with Cerebro.
 
-Minimum requirements:
-
-* Linux OS
-* Nextflow v24 or v25
-* Conda/Mamba/Docker
-
-Computational resource requirements are variable and range from a standard laptop for the application stack to full nation-wide server infrastructure for pipelines and web-application (if you were so inclined). This is because the application stack for data and reporting can be deployed with various [infrastructure, data security and collaboration models]() in mind and depends on the number of laboratories, collaborators, sequencing throughput, data storage and many other considerations.
+Computational resource requirements are variable and range from a standard laptop for the application stack to full nation-wide server infrastructure for pipelines and web-application (if you were so inclined). This is because the application stack for data and reporting is intended to be deployed with various infrastructure, data security and collaboration models in mind and depends on the number of laboratories, collaborators, sequencing throughput, data storage and many other considerations.
 
 > [!NOTE]
-You do not need the `Docker` stack for core metagenome diagnostic pipelines and report generation - you can run the [Nextflow pipelines]() separately and use the [`Cerebro CLI`](#command-line-client) for data manipulation, processing of pipeline outputs and clinical report generation.
+You do not need the `Docker` stack for core metagenome diagnostic pipelines and report generation - you can run the [Nextflow pipeline](#nextflow-pipeline) separately and use the [`Cerebro CLI`](#cerebro-cli) for data manipulation, processing of pipeline outputs and clinical report generation.
 
 ## Nextflow pipeline
 
@@ -111,12 +111,12 @@ Profiles are comma-separated and combine. You normally need one from each of the
 | **Execution** | `mamba`, `conda`, `apptainer` |
 | **Assay** | `cns` (deduplication + Illumina adapters, for CSF/ocular fluid), `panviral` |
 | **Database** | `cipher`, `cipher_nohost`, `ictv`, `ictv_nohost` |
-| **Resources** | `micro` (8 cpu/32 GB), `tiny` (16/64), `mini` (32/128), `small` (64/512), `medium` (128/1024), `large` (192/1536), `xl` (256/1912), `dgx` |
+| **Resources** | `micro` (8 CPU/32 GB RAM), `tiny` (16/64), `mini` (32/128), `small` (64/512), `medium` (128/1024), `large` (192/1536), `xl` (256/1912), `dgx` |
 | **Executor** | `slurm` (with `--slurmPartition`, `--slurmAccount`, `--slurmQos`, `--slurmGpu`) |
 | **Modifiers** | `keepHost` (skip host depletion), `deduplicate` |
 
 > [!NOTE]
-> `dgx` is not only a resource profile-it also sets per-tool thread counts and the `Apptainer`
+> `dgx` is not only a resource profile - it also sets per-tool thread counts and the `Apptainer`
 > library, cache and bind paths. Later profiles override earlier ones, so profile order matters.
 
 ### Quick start
@@ -153,7 +153,7 @@ mkdir fastq && cp /path/to/run/fastq/* fastq/
 ```
 
 > [!IMPORTANT]
-> Sample identifiers must follow `{SAMPLE_ID}__{NUCLEIC_ACID}__{SAMPLE_TAG}_{TAIL}`-for example
+> Sample identifiers must follow `{SAMPLE_ID}__{NUCLEIC_ACID}__{SAMPLE_TAG}_{TAIL}` - for example
 > `DW-63-103__DNA__S_S1`. Control tags `NTC`, `ENV` and `POS` are required for automatic control
 > co-selection in the application, and DNA/RNA tags drive library pairing. Identifiers must be
 > anonymised, must not contain spaces, and must not encode the sample site or type.
@@ -229,7 +229,7 @@ Production parameters:
 
 | Parameter | Required | Notes |
 | --- | --- | --- |
-| `--production` |-| Enables model creation and upload. Off by default. |
+| `--production` | n/a | Enables model creation and upload. Off by default. |
 | `--apiUrl` | yes | API endpoint address. |
 | `--apiTokenEnv` | no | Environment variable holding the token. Default `CEREBRO_API_TOKEN`. |
 | `--teamName` | yes | Must already exist. |
@@ -265,6 +265,10 @@ misconfigured production run does not waste compute.
 
 `results/` holds the processed summaries that are safe to transfer to a remote server. The `quality/`
 and `pathogen/` directories hold the full raw outputs and stay local.
+
+> [!IMPORTANT]
+> This applies to pipeline outputs. Outputs of `cerebro-ciqa` from runs that included clinical notes
+> may contain reproduced patient information, see [Clinical notes in prompt context and outputs](#clinical-notes-in-prompt-context-and-outputs).
 
 The aggregation step that produces `results/models/` runs automatically under `--production`. To
 reproduce it after a non-production run:
@@ -336,10 +340,6 @@ cerebro-ciqa     --help  # validation, quality assurance and the experimental di
 The following are internal components of a deployed stack and are **not intended for direct use**:
 `cerebro-server`, `cerebro-fs`, `cerebro-watcher`, `cerebro-tower`, `cerebro-worker`.
 
-> [!NOTE]
-> `cerebro-ciqa` tracks the `main` branch of `Cerebro` rather than the released version, and pulls in
-> the `META-GPT` library. See [AI-assisted diagnostic interpretation](#disclosure-ai-assisted-diagnostic-interpretation).
-
 Authenticate against a stack. The token is read from `CEREBRO_API_TOKEN` by all subsequent commands:
 
 ```bash
@@ -390,7 +390,8 @@ Using `*.qc.json` rather than the full `*.model.json` is considerably faster. Th
 > [!IMPORTANT]
 > Samples must follow the naming scheme `{SAMPLE_ID}__{NUCLEIC_ACID}__{SAMPLE_TAG}_{TAIL}` for
 > control co-selection and DNA/RNA pairing to work. Identifiers must be anonymised and must never
-> contain spaces, linkable identifiers, or the actual sample site or type.
+> contain spaces, linkable identifiers, or the actual sample site or type. Custom tags can be added
+> and outside the reserved tags
 
 
 ## Clinical reporting
@@ -526,7 +527,7 @@ input files at the start of a run unless the `--fastq` argument is provided (see
 
 ### Quick start
 
-The default pathogen detection configuration uses the **`Cipher`** diagnostic database-an
+The default pathogen detection configuration uses the **`Cipher`** diagnostic database - an
 amalgamation of archaeal and bacterial (GTDB), eukaryotic (EuPath, WormBase) and viral (ICTV)
 reference genome collections with a grafted taxonomy. It supplies the indices for all classifiers in
 the profiling module (`Kraken2`, `Metabuli`, `Ganon2`, `Sylph`, `KMCP`, `Bracken`), the alignment
@@ -550,7 +551,7 @@ Useful options:
 - `--strict` raises an error when a taxonomic identifier cannot be resolved, instead of skipping it
 
 > [!NOTE]
-> Custom database and index construction is handled by [`Cipher`](https://github.com/esteinig/cipher).
+> Custom database and index construction is handled by [`Cipher`](https://github.com/vidrl/cipher).
 > It is a research tool, is not yet user-friendly, and is not ready for general deployment. Building
 > a replacement database currently requires constructing indices for each classifier manually.
 
@@ -558,19 +559,53 @@ Useful options:
 
 Cerebro includes an experimental capability for large language model (LLM) assisted interpretation of metagenomic results. It is implemented in the `cerebro-ciqa` module (cerebro/stack/ciqa) via the `meta-gpt` crate, and combines a structured decision tree with a locally deployed, open-weight reasoning model (Qwen3, GGUF weights, default `qwen3-8b-q8-0`) to assign diagnoses and select pathogen candidates.
 
-This feature is used through the `cerebro-ciqa` diagnose-local subcommand. It is not part of the Nextflow detection pipelines, and it is not invoked automatically anywhere in the clinical reporting path - no result reaches a report through this module unless a user explicitly runs it.
+This feature is used through the `cerebro-ciqa diagnose-local` subcommand. It is not part of the Nextflow detection pipelines, and it is not invoked automatically anywhere in the clinical reporting path - no result reaches a report through this module unless a user explicitly runs it.
+
+This disclosure covers Cerebro's own interpretive module only. Using a general-purpose AI system (a chat interface, an API, or a locally hosted model) to interpret pipeline outputs or specimen data outside this pathway is prohibited by repository policy; see [`AI_POLICY.md`](AI_POLICY.md) and [`AGENTS.md`](AGENTS.md).
+
+### Intended purpose
+
+The primary purpose of this module is **quality assurance and configuration evaluation at scale**,
+not per-patient interpretation.
+
+Computational metagenomics has a large configuration surface that materially affects what gets reported: database and taxonomy version, classifier set and their individual parameters, host and background depletion strategy, evidence scoring and multi-classifier reconciliation, contamination handling, and the tiered detection thresholds. Changing any of these changes the candidate list a human would review. Establishing whether a given change is an improvement, a regression, or a wash requires someone to look at the resulting output for each sample and say whether the right organism was identified. That interpretive step, performed by a clinician or senior scientist, is the bottleneck. It is expensive, it is slow, and it does not scale to the number of configurations, database revisions and reference samples you would need to sweep in order to characterise the system properly. In practice it means most configuration changes are made on the basis of spot checks and intuition rather than measurement.
+
+Against reference datasets where the answer is already known from confirmed orthogonal testing (PCR, culture, serology, targeted sequencing, or adjudicated clinical diagnosis established independently of this pipeline) the interpretive step can be automated. `cerebro-ciqa` applies a structured decision tree and a local reasoning model to the pipeline output for each sample and produces a determination, which is then scored against the known result. This makes it possible to:
+
+- Compare pipeline configurations, database versions, classifier sets and threshold choices against
+  a fixed reference set, and quantify the difference.
+- Re-run a benchmark suite after a change to detection, filtering or scoring logic, as a regression
+  check on diagnostic behaviour - the kind of check the repository's unit test coverage does not
+  currently provide.
+- Characterise behaviour near the limit of detection, across contamination and background scenarios,
+  and on simulated syndromic panels generated with `Cipher`, at a sample count that expert review
+  could not cover.
+- Estimate the cost of a proposed change before it reaches a clinical workflow.
+
+Supporting expert review of an individual clinical case is a secondary and [exploratory research use](#evaluation-and-its-limits). It is subject to the conditions below, and nothing about the intended purpose above relaxes them.
+
+#### What this implies about how it should be used
+
+`cerebro-ciqa` is a measurement instrument, and the properties that matter are the ones that matter for any instrument:
+
+- **Its own error rate is part of the measurement.** The figures in the evaluation below are the characterisation of the instrument, on one cohort, one assay and one specimen type. Outside that regime the instrument is uncharacterised, and a benchmark measures nothing interpretable without validation under the the changed regime.
+- **It is better for relative comparison than for absolute claims.** When two configurations are scored against the same reference set with the same CIQA configuration, the module's error is common to both and cancels in the difference (which allows for statistical comparisons, see preprint Figure 5). The same cancellation does not apply to a headline diagnsotic performance figure for a single configuration, which inherits the module's error in full.
+- **Common-mode cancellation fails when the module's weaknesses correlate with what you are varying.** If a configuration change affects precisely the taxa, evidence patterns or abundance ranges the model handles poorly, the comparison is confounded (e.g. a model was used that was not trained on data containing full species names for viruses, which are output by Cerebro under the ICTV component of the Cipher reference database). Changes in that category need expert review regardless of what the benchmark reports.
+- **Do not close the loop.** A configuration tuned against CIQA scores and then evaluated by CIQA is measuring its own fit to the module, not diagnostic performance. Held-out reference sets and periodic expert audit of a sampled subset are the minimum controls; the module's own determinations should never become ground truth.
+- **The reference set is doing the real work.** Its value depends entirely on the orthogonal confirmation behind it, and its composition (pathogen mix, biomass range, controls, negatives) determines what the benchmark can and cannot detect. A benchmark result is only as meaningful as the panel it was run against.
+- **Reproducibility is a precondition, not a caveat.** A benchmark you cannot re-run under an identical configuration is not a benchmark. See the reproducibility section below.
 
 ### Evaluation and its limits
 
-The approach was evaluated in the preprint listed above and has not been peer reviewed.
+The approach was evaluated in the [preprint](https://doi.org/10.64898/2026.07.29.26358751) listed below and has not been peer reviewed.
 
 Reported performance was obtained on a single-centre, non-representative cohort and does not support generalisation:
 
-* One study, one site, one assay. All data derive from the META-GP study (Victoria, Australia, 2024–2025) using a single short-read Illumina protocol for sterile-site specimens (cerebrospinal and ocular fluid). No other specimen type, sample matrix, sequencing platform, laboratory or population was assessed
-* Small, constructed validation set: validation comprised clinical samples, spike-ins and controls; it is not a consecutive, prospectively collected clinical series
-* Headline figures are from a filtered subset. The reported sensitivity and specificity (94.4% / 95.4% without clinical notes; 97.2% / 100% with clinical notes) are for the subset above the experimental limit of detection (n = 79)
-* The development cohort (n = 78) was heterogeneous and was not designed to estimate performance
-* Not assessed: prospective use, high-biomass specimen types, other pathogens, other model families, or any deployment outside the evaluated configuration
+* One study, one site, one assay. All data derive from the META-GP study (Victoria, Australia, 2024–2025) using a single short-read Illumina protocol for sterile-site specimens (cerebrospinal and ocular fluid). No other specimen type, sample matrix, sequencing platform, laboratory or population was assessed.
+* Small, constructed validation set: validation comprised clinical samples, spike-ins and controls; it is not a consecutive, prospectively collected clinical series.
+* Headline figures are from a filtered subset. The reported sensitivity and specificity (94.4% / 95.4% without clinical notes; 97.2% / 100% with clinical notes) are for the subset above the experimental limit of detection (n = 79).
+* The development cohort (n = 78) was heterogeneously sequenced and was not designed to estimate performance.
+* Not assessed: prospective use, high-biomass specimen types, other pathogens, other model families, or any deployment outside the evaluated configuration.
 
 ### Reproducibility caveat
 
@@ -578,13 +613,65 @@ Outputs are stochastic and are sensitive to the model, quantisation, system prom
 
 The `meta-gpt` dependency is currently pinned to a git branch (`main`) rather than a tag or commit. A new build made will not necessarily reproduce the system that was evaluated. Pin the dependency to a specific revision before using this module for anything you intend to rely on.
 
+### Clinical notes in prompt context and outputs
+
+`cerebro-ciqa` requires a reference plate file to run, and clinical notes are supplied through its
+`clinical` field, so the notes exist as a persistent input artefact on disk before any model is
+invoked, and the reference plate file must be handled as a clinical record on the same terms as the
+outputs described below. The evaluation reports better performance when notes are supplied. Be aware
+of what this means for both the input file and the outputs.
+
+**Anything placed in the prompt context can reappear in the output.** The model may restate clinical notes verbatim, paraphrase them, or draw inferences from them, in both its final answer and its intermediate reasoning. Reasoning traces are the greater exposure: a reasoning model working through a case will typically restate the presenting history, the immunocompromise status, the travel or exposure history and the differential it is weighing, in more detail than the final determination contains. This is inherent to how the model works. It is not a bug, it cannot be prompted away reliably, and it should be assumed to happen rather than checked for case by case.
+
+**Consequently, CIQA outputs derived from runs that included clinical notes are clinical records and
+must be handled as such** including the model determination, any reasoning or trace output, any log or console capture, any benchmark or scoring artefact that embeds model output, and any file derived from them. They carry the same protection as the report configuration file described under
+[Clinical reporting](#clinical-reporting).
+
+This is an exception to assumptions that hold elsewhere in Cerebro:
+
+- Sample identifiers are required to be anonymised and to carry no sample site or type. Free-text
+  clinical notes carry all of it, and CIQA outputs may carry it forward under an anonymised
+  identifier — which makes the exposure easy to miss, because the filename looks safe.
+- `results/` is described as safe to transfer to a remote server. That applies to pipeline outputs.
+  It does not apply to CIQA outputs from note-supplied runs.
+- Clinical reports are compiled in-browser precisely so patient information is not transmitted to
+  the server. Uploading CIQA output containing notes to a stack, a project, or shared storage
+  defeats that control by another route.
+- A file that looks like pipeline configuration is not necessarily configuration. The reference plate
+  file carries free-text clinical detail in the same object as the sample manifest and the expected
+  results, so it cannot be shared as a benchmark definition without review.
+
+Recommended practice:
+
+- Prefer a de-identified clinical summary over raw notes: the syndromic and host-factor information
+  that helps the model is usually separable from names, dates, identifiers, locations and
+  free-text detail that identifies the patient by circumstance (see preprint clinical note examples
+  for mock samples included in the validation dataset)
+- Decide before the run where the outputs will be written, who can read that path, and when they
+  will be deleted. Do not write them to a shared or synced location by default.
+- Capture and dispose of reasoning traces deliberately. If you retain them for audit — which is
+  reasonable — retain them under clinical data controls, not alongside pipeline artefacts.
+- **Before publishing or sharing benchmark results, review the outputs, not just the scores.**
+  Scoring tables, supplementary data and issue attachments derived from note-supplied runs can carry
+  reproduced clinical detail. This is the most likely route to an inadvertent disclosure, because the
+  work by then feels like methods development rather than patient data handling.
+- If a reference or benchmark dataset includes clinical notes, its CIQA outputs inherit this status
+  for as long as they are retained, including across configuration sweeps that regenerate them
+  repeatedly.
+- Apply the same storage, access and disposal decisions to the reference plate file as to the
+  outputs. It is easily overlooked: it is written once, then persists in the run directory as
+  configuration, and it is the artefact most likely to be copied between runs, shared with a
+  collaborator, committed to a repository, or attached to an issue when reproducing a benchmark.
+- Never paste CIQA input or output into a general-purpose AI system. See
+  [`AI_POLICY.md`](AI_POLICY.md) and `AGENTS.md` §4.
+
 ### Conditions of use
 
-This feature must not be used as the sole or primary basis for a clinical diagnosis, a patient report, or any patient management decision. It is intended to support review by a qualified expert, and does not replace the expertise required to evaluate all possible pathogen detections (see development cohort in preprint).
+Whatever the use, this feature must not be used as the sole or primary basis for a clinical diagnosis, a patient report, or any patient management decision. Its intended purpose is quality assurance and configuration evaluation against reference datasets with confirmed orthogonal results; where it is used on an individual clinical case, it supports review by a qualified expert and does not replace the expertise required to evaluate all possible pathogen detections (see development cohort in preprint).
 
 Cerebro and its dependencies have no regulatory clearance or approval from the TGA, FDA, or any other authority. It is not an approved in vitro diagnostic and is not accredited for diagnostic reporting. Any diagnostic use requires local validation on your own specimens, protocol and population, under your laboratory's quality management system and accreditation requirements. Every output requires human expert review before it informs anything.
 
-### Research code
+## Research code
 
 Cerebro is a research project. It is not a production-ready or clinically validated codebase, and it should not be treated as one. The repository describes deployment in clinical and public health settings because that is the intended eventual purpose. It does not yet meet the standard that purpose requires. Users should be aware that, at present:
 
@@ -604,4 +691,4 @@ The evaluation study for Cerebro and META-GPT is in preprint:
 
 Cerebro includes code for the viral enrichment branch of the pipeline used in:
 
-> Michael A Moso, George Taiaroa, Eike Steinig, Madiyar Zhanduisenov, Grace Butel-Simoes, Ivana Savic, Mona L Taouk, Socheata Chea, Jean Moselen, Jacinta O’Keefe, Jacqueline Prestedge, Georgina L Pollock, Mohammad Khan, Katherine Soloczynskyj, Janath Fernando, Genevieve E Martin, Leon Caly, Ian G Barr, Thomas Tran, Julian Druce, Chuan K Lim, Deborah A Williamson - **Non-SARS-CoV-2 respiratory viral detection and whole genome sequencing from COVID-19 rapid antigen test devices: a laboratory evaluation study** - Lancet Microbe (2024) -[10.1016/S2666-5247(23)00375-0](https://doi.org/10.1016/S2666-5247(23)00375-0)
+> Michael A Moso, George Taiaroa, Eike Steinig, Madiyar Zhanduisenov, Grace Butel-Simoes, Ivana Savic, Mona L Taouk, Socheata Chea, Jean Moselen, Jacinta O’Keefe, Jacqueline Prestedge, Georgina L Pollock, Mohammad Khan, Katherine Soloczynskyj, Janath Fernando, Genevieve E Martin, Leon Caly, Ian G Barr, Thomas Tran, Julian Druce, Chuan K Lim, Deborah A Williamson - **Non-SARS-CoV-2 respiratory viral detection and whole genome sequencing from COVID-19 rapid antigen test devices: a laboratory evaluation study** - Lancet Microbe (2024) - [10.1016/S2666-5247(23)00375-0](https://doi.org/10.1016/S2666-5247(23)00375-0)
