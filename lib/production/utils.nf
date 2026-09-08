@@ -497,8 +497,8 @@ def completionMessage(){
         - blast          2.13.0     https://github.com/ncbi                   
         - mash           2.3        https://github.com/marbl/Mash             
         - diamond        2.1.4      https://github.com/bbuchfink/diamond      
-        - vircov         1.0.0      https://github.com/esteinig/vircov        
-        - scrubby        1.0.0      https://github.com/esteinig/scrubby 
+        - vircov         1.0.0      https://github.com/vidrl/vircov        
+        - scrubby        1.0.0      https://github.com/vidrl/scrubby 
         - rasusa         2.0.0      https://github.com/mbhall88/rasusa
         - cnvkit         0.9.10     https://github.com/etal/cnvkit
         - nanoq          0.10.0     https://github.com/esteinig/nanoq
