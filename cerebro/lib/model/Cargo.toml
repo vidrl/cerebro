@@ -1,6 +1,6 @@
 [package]
 name = "cerebro-model"
-version = "1.0.0-alpha.1"
+version = "1.0.0"
 authors = ["meta-gp"]
 description = "Cerebro: shared data models for separation of client and server"
 documentation = "https://github.com/vidrl/cerebro"

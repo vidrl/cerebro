@@ -1,6 +1,6 @@
 [package]
 name = "cerebro-pipeline"
-version = "1.0.0-alpha.1"
+version = "1.0.0"
 authors = ["meta-gp"]
 description = "Cerebro: pipeline module for internal utility tools and output handling"
 documentation = "https://github.com/vidrl/cerebro"
