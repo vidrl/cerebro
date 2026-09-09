@@ -611,20 +611,13 @@ Reported performance was obtained on a single-centre, non-representative cohort 
 
 Outputs are stochastic and are sensitive to the model, quantisation, system prompt, and decision tree configuration. Changing any of these changes behaviour and invalidates the reported performance.
 
-The `meta-gpt` dependency is currently pinned to a git branch (`main`) rather than a tag or commit. A new build made will not necessarily reproduce the system that was evaluated. Pin the dependency to a specific revision before using this module for anything you intend to rely on.
-
 ### Clinical notes in prompt context and outputs
 
-`cerebro-ciqa` requires a reference plate file to run, and clinical notes are supplied through its
-`clinical` field, so the notes exist as a persistent input artefact on disk before any model is
-invoked, and the reference plate file must be handled as a clinical record on the same terms as the
-outputs described below. The evaluation reports better performance when notes are supplied. Be aware
-of what this means for both the input file and the outputs.
+`cerebro-ciqa` requires a reference plate file to run, and clinical notes are supplied through its `clinical` field, so the notes exist as a persistent input artefact on disk before any model is invoked, and the reference plate file must be handled as a clinical record on the same terms as the outputs described below. The evaluation reports better performance when notes are supplied. Be aware of what this means for both the input file and the outputs.
 
 **Anything placed in the prompt context can reappear in the output.** The model may restate clinical notes verbatim, paraphrase them, or draw inferences from them, in both its final answer and its intermediate reasoning. Reasoning traces are the greater exposure: a reasoning model working through a case will typically restate the presenting history, the immunocompromise status, the travel or exposure history and the differential it is weighing, in more detail than the final determination contains. This is inherent to how the model works. It is not a bug, it cannot be prompted away reliably, and it should be assumed to happen rather than checked for case by case.
 
-**Consequently, CIQA outputs derived from runs that included clinical notes are clinical records and
-must be handled as such** including the model determination, any reasoning or trace output, any log or console capture, any benchmark or scoring artefact that embeds model output, and any file derived from them. They carry the same protection as the report configuration file described under
+**Consequently, CIQA outputs derived from runs that included clinical notes are clinical records and must be handled as such** including the model determination, any reasoning or trace output, any log or console capture, any benchmark or scoring artefact that embeds model output, and any file derived from them. They carry the same protection as the report configuration file described under
 [Clinical reporting](#clinical-reporting).
 
 This is an exception to assumptions that hold elsewhere in Cerebro:

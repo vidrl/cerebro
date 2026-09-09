@@ -27,11 +27,11 @@ name = "cerebro_ciqa"
 
 [dependencies]
 
-cerebro-fs = { git = "https://github.com/vidrl/cerebro", package = "cerebro-fs", branch = "main" }
-cerebro-client = { git = "https://github.com/vidrl/cerebro", package = "cerebro-client", branch = "main" }
-cerebro-model = { git = "https://github.com/vidrl/cerebro", package = "cerebro-model", branch = "main" }
-cerebro-pipeline = { git = "https://github.com/vidrl/cerebro", package = "cerebro-pipeline", branch = "main" }
-meta-gpt = { git = "https://github.com/esteinig/meta-gpt", branch = "main", features = [], default-features = false }
+cerebro-fs = { git = "https://github.com/vidrl/cerebro", package = "cerebro-fs", rev = "a74cd36913a1b6d620b7ddfc6613eee7e75d03e0" }
+cerebro-client = { git = "https://github.com/vidrl/cerebro", package = "cerebro-client", rev = "a74cd36913a1b6d620b7ddfc6613eee7e75d03e0" }
+cerebro-model = { git = "https://github.com/vidrl/cerebro", package = "cerebro-model", rev = "a74cd36913a1b6d620b7ddfc6613eee7e75d03e0" }
+cerebro-pipeline = { git = "https://github.com/vidrl/cerebro", package = "cerebro-pipeline", rev = "a74cd36913a1b6d620b7ddfc6613eee7e75d03e0" }
+meta-gpt = { git = "https://github.com/vidrl/meta-gpt", rev = "f97d55c19956c03f90a095fa8432ef4971aa9626", features = [], default-features = false }
 
 
 
