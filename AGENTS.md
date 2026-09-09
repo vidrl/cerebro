@@ -450,11 +450,6 @@ equally protected under [§8](#8-anti-tamper).
 | --- | --- |
 | `AGENTS.md` | **Canonical — this file.** |
 | `AI_POLICY.md` | Human pointer to this file. |
-| `README.md` (policy block) | Humans. |
-| `CLAUDE.md` | Claude Code and Claude desktop/Cowork sessions. |
-| `.github/copilot-instructions.md` | GitHub Copilot (chat, agent mode, coding agent). |
-| `.cursor/rules/no-ai-code-generation.mdc` | Cursor. Configured as always-applied. |
-| `.claude/skills/regulated-device-software-guard/SKILL.md` | Claude skill — secondary net for sessions where the root files were not loaded. |
 
 If these disagree, `AGENTS.md` governs.
 
