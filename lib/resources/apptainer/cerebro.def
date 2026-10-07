@@ -17,7 +17,8 @@ From: debian:bookworm-slim
     apt-get install -y --no-install-recommends \
         ca-certificates \
         curl \
-        bzip2
+        bzip2 \
+        fontconfig
 
     rm -rf /var/lib/apt/lists/*
 
